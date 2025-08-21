@@ -94,13 +94,14 @@ jobs:
 
         - name: Build Tag and push Docker Image
           env:
-            IMAGE_NAME: chida1.jfrog.io/solar-docker/jfrog-docker-example-image:${{ github.run_number }}
+            IMAGE_NAME: chida1.jfrog.io/solar-docker/${{ env.BUILD_NAME }}:${{ github.run_number }}
           run: |
            jf docker build -t $IMAGE_NAME .
            jf docker push $IMAGE_NAME
-           jf docker scan
  
         - name: Publish Build info With JFrog CLI
+          env:
+            IMAGE_NAME: chida1.jfrog.io/solar-docker/${{ env.BUILD_NAME }}:${{ github.run_number }}
           run: |
             # Export the build name and build nuber
             # Collect environment variables for the build
@@ -110,4 +111,4 @@ jobs:
             # Publish build info
             jf rt build-publish
             #Scan docker image
-            jf docker scan --build-name ${BUILD_NAME} --build-number ${{ github.run_number }} 
+            jf docker scan ${{ env.IMAGE_NAME }}--build-name ${{ env.BUILD_NAME }} --build-number ${{ github.run_number }} 

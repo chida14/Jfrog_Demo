@@ -80,7 +80,7 @@ jobs:
       runs-on: ubuntu-latest
       needs: [build_test]
       env:
-        BUILD_NAME: Solar-JFrog
+        BUILD_NAME: solar-jfrog
         BUILD_NUMBER: ${{ github.run_number }}
       steps:
         - name: Checkout code

@@ -68,9 +68,9 @@ jobs:
        - name: Publish Build info With JFrog CLI
          run: |
           # Collect environment variables for the build
-          jf rt build-collect-env
+          jf rt build-collect-env --build-name "$BUILD_NAME" --build-number "$BUILD_NUMBER"
           # Collect VCS details from git and add them to the build
-          jf rt build-add-git
-          # Publish build info
-          jf rt build-publish
-          jf build-scan
+          jf rt build-add-git 
+          # Publish build info 
+          jf rt build-publish 
+          jf build-scan 

@@ -111,4 +111,4 @@ jobs:
             # Publish build info
             jf rt build-publish
             #Scan docker image
-            jf docker scan ${{ env.IMAGE_NAME }}--build-name ${{ env.BUILD_NAME }} --build-number ${{ github.run_number }} 
+            jf docker scan ${{ env.IMAGE_NAME }} --build-name ${{ env.BUILD_NAME }} --build-number ${{ github.run_number }} 

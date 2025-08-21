@@ -94,7 +94,7 @@ jobs:
 
         - name: Build Tag and push Docker Image
           env:
-            IMAGE_NAME: chida1.jfrog.io/solar-docker/jfrog-docker-example-image:${BUILD_NUMBER}
+            IMAGE_NAME: chida1.jfrog.io/solar-docker/jfrog-docker-example-image:${{ github.run_number }}
           run: |
            jf docker build -t $IMAGE_NAME .
            jf docker push $IMAGE_NAME
@@ -110,4 +110,4 @@ jobs:
             # Publish build info
             jf rt build-publish
             #Scan docker image
-            jf docker scan --build-name ${BUILD_NAME} --build-number ${BUILD_NUMBER} 
+            jf docker scan --build-name ${BUILD_NAME} --build-number ${{ github.run_number }} 

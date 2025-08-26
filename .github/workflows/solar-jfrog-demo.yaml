@@ -94,6 +94,7 @@ jobs:
             JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
 
         - name: Build Tag and push Docker Image
+          continue-on-error: true
           env:
             IMAGE_NAME: chida1.jfrog.io/solar-docker/${{ env.BUILD_NAME }}:${{ github.run_number }}
           run: |

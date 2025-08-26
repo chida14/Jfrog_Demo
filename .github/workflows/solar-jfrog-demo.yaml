@@ -114,6 +114,9 @@ jobs:
             jf docker scan ${{ env.IMAGE_NAME }} --build-name ${{ env.BUILD_NAME }} --build-number ${{ github.run_number }} 
 
   dev-deploy:
+      env:
+        BUILD_NAME: solar-jfrog
+        BUILD_NUMBER: ${{ github.run_number }}
       needs: docker-build-and-tag
       runs-on: ubuntu-latest
       steps:
@@ -132,7 +135,28 @@ jobs:
 
         - name: Fetch K8s Cluster Details
           run: |
-            kubectl version --short
+            kubectl version
             echo -------------------------------------------------------
             kubectl get nodes 
 
+        - name: Save Ingress Nginx Controller IP as a GITHUB Environment Variable
+          run: |
+            echo "INGRESS_IP=$(kubectl -n development get service ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")" >> $GITHUB_ENV
+
+        - name: Replace Token in Manifest files
+          uses: cschleiden/replace-tokens@v1
+          with:
+            tokenPrefix: '{'
+            tokenSuffix: '}'
+            files: '["kubernetes/development/*.yaml"]'
+          env:
+            NAMESPACE: ${{ vars.NAMESPACE }}
+            REPLICAS: ${{ vars.REPLICAS }}
+            K8S_IMAGE: chida1.jfrog.io/solar-docker/${{ env.BUILD_NAME }}:${{ github.run_number }}
+            INGRESS_IP: ${{ env.INGRESS_IP }}
+        
+        - name: Check Files
+          run: |
+            cat kubernetes/development/*.yaml
+
+        

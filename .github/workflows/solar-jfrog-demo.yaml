@@ -7,7 +7,6 @@ on:
       - main
       # - 'feature/*'
   
-
 permissions:
   contents: read
   security-events: write

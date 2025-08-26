@@ -73,6 +73,7 @@ jobs:
           jf rt build-add-git 
           # Publish build info 
           jf rt build-publish 
+          # Scan build
           jf build-scan 
 
   docker-build-and-tag:
@@ -110,6 +111,8 @@ jobs:
             jf rt build-add-git
             # Publish build info
             jf rt build-publish
+            # Scan build
+            jf build-scan 
             #Scan docker image
             jf docker scan ${{ env.IMAGE_NAME }} --build-name ${{ env.BUILD_NAME }} --build-number ${{ github.run_number }} 
 
@@ -146,8 +149,8 @@ jobs:
         - name: Replace Token in Manifest files
           uses: cschleiden/replace-tokens@v1
           with:
-            tokenPrefix: '{'
-            tokenSuffix: '}'
+            tokenPrefix: '_{_'
+            tokenSuffix: '_}_'
             files: '["kubernetes/development/*.yaml"]'
           env:
             NAMESPACE: ${{ vars.NAMESPACE }}

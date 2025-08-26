@@ -156,7 +156,7 @@ jobs:
           env:
             NAMESPACE: ${{ vars.NAMESPACE }}
             REPLICAS: ${{ vars.REPLICAS }}
-            K8S_IMAGE: chida1.jfrog.io/solar-docker/${{ env.BUILD_NAME }}:${{ github.run_number }}
+            IMAGE: chida1.jfrog.io/solar-docker/${{ env.BUILD_NAME }}:${{ github.run_number }}
             INGRESS_IP: ${{ env.INGRESS_IP }}
         
         - name: Check Files

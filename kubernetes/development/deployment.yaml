@@ -16,6 +16,8 @@ spec:
       labels:
         app: solar-system
     spec:
+      imagePullSecrets:
+        - name: jfrog-regcred
       containers:
       - image: _{_IMAGE_}_
         imagePullPolicy: Always

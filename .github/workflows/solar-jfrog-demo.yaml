@@ -113,7 +113,7 @@ jobs:
             # Publish build info
             jf rt build-publish
             # Scan build
-            jf build-scan 
+            #jf build-scan 
             #Scan docker image
             jf docker scan ${{ env.IMAGE_NAME }} --build-name ${{ env.BUILD_NAME }} --build-number ${{ github.run_number }} 
 

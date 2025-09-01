@@ -12,5 +12,4 @@
 
 
 ## Workflow Architecture
-![Jfrog_demo](https://github.com/user-attachments/assets/b5818966-1cdb-494b-87fc-7530964d3ad5)
-
+![Jfrog_demo1](https://github.com/user-attachments/assets/edf66fbe-501e-4dec-a6ee-2ff439591572)
